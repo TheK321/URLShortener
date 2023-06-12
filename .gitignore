@@ -2121,3 +2121,5 @@ env/Scripts/py.test.exe
 env/Scripts/pytest.exe
 __pycache__/app.cpython-311.pyc
 __pycache__/test_app.cpython-311-pytest-7.3.2.pyc
+__pycache__/database.cpython-311.pyc
+__pycache__/models.cpython-311.pyc
