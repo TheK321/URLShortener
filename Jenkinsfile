@@ -9,19 +9,15 @@ pipeline {
       }
     }
 
-    stage('Build Docker Images') {
-      steps {
-        // Construir la imagen de Docker para la aplicación Flask
-        script {
-          docker.build("flask-app:${env.BUILD_NUMBER}", './app')
-        }
-        
-        // Construir la imagen de Docker para el contenedor de la base de datos
-        script {
-          docker.build("mysql-db:${env.BUILD_NUMBER}", './database')
-        }
+   stage('Build Docker Images') {
+    steps {
+      script {
+        def buildNumber = env.BUILD_NUMBER ?: 'unknown'
+        docker.build("flask-app:${buildNumber}", './app')
+        docker.build("mysql-db:${buildNumber}", './database')
       }
     }
+   }
 
     stage('Deploy') {
       steps {
