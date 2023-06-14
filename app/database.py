@@ -2,7 +2,7 @@ import pymysql
 
 def create_connection():
     connection = pymysql.connect(
-        host='localhost',
+        host='mysql-db',
         user='root',
         password='root',
         database='urls',
@@ -12,9 +12,10 @@ def create_connection():
 
 def check_connection():
     connection_chk = pymysql.connect(
-        host='localhost',
+        host='mysql-db',
         user='root',
         password='root',
+        database='mysql',
         cursorclass=pymysql.cursors.DictCursor
     )
     return connection_chk

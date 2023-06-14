@@ -48,6 +48,21 @@ def redirect_url(short_code):
     finally:
         connection.close()
 
+@app.route('/stats_web')
+def get_general_stats():
+    connection = create_connection()
+    try:
+        with connection.cursor() as cursor:
+            # Obtener los datos de la tabla urls
+            sql = "SELECT short_url, link, hits FROM urls"
+            cursor.execute(sql)
+            links = cursor.fetchall()
+
+            # Renderizar la plantilla con los datos
+            return render_template('stats.html', links=links)
+
+    finally:
+        connection.close()
 @app.route('/stats/<short_code>', methods=['GET'])
 def get_link_stats(short_code):
     connection = create_connection()
@@ -85,4 +100,4 @@ def get_urls():
 
 if __name__ == '__main__':
     check_database()
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
